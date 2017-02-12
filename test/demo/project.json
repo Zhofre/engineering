@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "debugType": "portable",
+    "outputName": "Engineering.Demo",
+    "emitEntryPoint": true
+  },
+  "dependencies": {
+    "units" : {
+      "target": "project"
+    },
+    "quantities" : {
+      "target": "project"
+    }
+  },
+  "frameworks": {
+    "netcoreapp1.1": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.1.0"
+        }
+      },
+      "imports": "dnxcore50"
+    }
+  }
+}
