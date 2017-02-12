@@ -1,9 +1,8 @@
-﻿using System;
-
-namespace Engineering.Units
+﻿namespace Engineering.Units
 {
     public interface IUnit
     {
-        string Notation { get; }   
+        string Notation { get; }
+        IQuantity Quantity { get; }
     }    
 }
