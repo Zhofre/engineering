@@ -1,12 +1,14 @@
+using System;
+
 namespace Engineering.Units
 {
     /// <summary>
     ///     Quantity interface
     /// </summary>
-    public interface IQuantity
+    public interface IQuantity : IEquatable<IQuantity>
     {
         string Name { get; }
         string Symbol { get; }
-        IUnit SIUnit { get; }
+        IUnit BaseUnit { get; }
     }
 }

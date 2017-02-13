@@ -1,6 +1,8 @@
-﻿namespace Engineering.Units
+﻿using System;
+
+namespace Engineering.Units
 {
-    public interface IUnit
+    public interface IUnit : IEquatable<IUnit>
     {
         string Notation { get; }
         IQuantity Quantity { get; }
