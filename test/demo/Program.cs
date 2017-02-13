@@ -1,5 +1,5 @@
 ﻿using System;
-using Engineering.Quantities;
+using Engineering.Measurements;
 
 namespace TestConsole
 {
@@ -9,7 +9,8 @@ namespace TestConsole
         {
             Console.WriteLine("Units demo code");
             // todo: provide demo code
-            var q = new Quantity { Value = 1.0 };
+            var t = 5.0.Meters();
+            Console.WriteLine($"Extension test: {t}");
         }
     }
 }

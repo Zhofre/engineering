@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Engineering.Units.Expressions;
 
 namespace Engineering.Units
 {
-    public interface IUnit
+    public interface IUnit : IExpressible
     {
-        string Notation { get; }   
+        string Name { get; }
+        string Notation { get; }
+        IQuantity Quantity { get; }
     }    
 }

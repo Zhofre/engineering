@@ -11,7 +11,7 @@
     "units" : {
       "target": "project"
     },
-    "quantities" : {
+    "measurements" : {
       "target": "project"
     }
   },
