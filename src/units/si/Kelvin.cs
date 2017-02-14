@@ -1,4 +1,4 @@
-namespace Engineering.Units
+namespace Engineering.Units.SI
 {
     public sealed class Kelvin : BaseUnit
     {
