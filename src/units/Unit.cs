@@ -10,11 +10,20 @@ namespace Engineering.Units
             Quantity = quantity;
         }
 
-        bool IExpressible.CanScale => true;
+        bool IExpressible.CanPrefix => true;
         string IExpressible.Representation => Notation;
 
         public string Name { get; }
         public abstract string Notation { get; }
         public IQuantity Quantity { get; }
+
+        public static Expression<IUnit> operator *(Prefix p, Unit u)
+        {
+            var derU = u as DerivedUnit;
+            return new PrefixExpression<IUnit>(p,
+                derU == null
+                    ? new ConstantExpression<IUnit>(u)
+                    : derU.Expression);
+        }
     }
 }

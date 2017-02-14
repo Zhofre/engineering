@@ -2,7 +2,7 @@ namespace Engineering.Units.Expressions
 {    
     public interface IExpressible
     {
-        bool CanScale { get; }
+        bool CanPrefix { get; }
         string Representation { get; }
     }   
 }

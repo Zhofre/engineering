@@ -9,7 +9,7 @@ namespace Engineering.Units
             Name = name;
         }
 
-        bool IExpressible.CanScale => false;
+        bool IExpressible.CanPrefix => false;
         string IExpressible.Representation => Symbol;
         public string Name { get; }
         public abstract string Symbol { get; }
