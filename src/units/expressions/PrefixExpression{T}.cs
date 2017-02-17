@@ -29,6 +29,8 @@ namespace Engineering.Units.Expressions
             }
         }
 
+        internal override bool RequiresBrackets => false;
+
         public override Expression<TOther> Cast<TOther>(Func<T, TOther> f)
             => new PrefixExpression<TOther>(Prefix, Content.Cast(f));
     }

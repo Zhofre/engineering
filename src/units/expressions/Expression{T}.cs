@@ -8,6 +8,7 @@ namespace Engineering.Units.Expressions
     public abstract class Expression<T> : IExpressible
         where T : IExpressible
     {
+        internal abstract bool RequiresBrackets { get; }
         public abstract bool CanPrefix { get; }
         public abstract string Representation { get; }
         public abstract Expression<TOther> Cast<TOther>(Func<T, TOther> f)
@@ -25,5 +26,11 @@ namespace Engineering.Units.Expressions
         {
             return new PrefixExpression<T>(prefix, expression);
         }
+
+        internal string BracketedRepresentation
+            => "(" + Representation + ")";
+
+        internal string AutoBracketedRepresentation
+            => RequiresBrackets ? BracketedRepresentation : Representation;
     }
 }

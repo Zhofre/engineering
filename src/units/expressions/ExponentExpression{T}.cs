@@ -13,27 +13,20 @@ namespace Engineering.Units.Expressions
         }
 
         public double Exponent { get; }
+
         public Expression<T> Content { get; }
+
         public override bool CanPrefix => Content.CanPrefix;
+
+        internal override bool RequiresBrackets => false;
+
         public override string Representation
         {
             get
             {
                 if (Utility.Equals(Exponent, 1.0))
-                    return Content.Representation;
-
-                // convert exponent
-                var exponentString = "^" + Exponent.ToString(CultureInfo.InvariantCulture);
-
-                var constContent = Content as ConstantExpression<T>;
-                if (constContent != null)
-                    return constContent.Representation + exponentString;
-
-                var prefixContent = Content as PrefixExpression<T>;
-                if (prefixContent != null)
-                    return prefixContent.Representation + exponentString; // // no need for brackets for [mm], [kg], etc.
-
-                return "(" + Content.Representation + ")" + exponentString;
+                    return Content.Representation;                
+                return Content.AutoBracketedRepresentation +  "^" + Exponent.ToString(CultureInfo.InvariantCulture);
             }
         }
 

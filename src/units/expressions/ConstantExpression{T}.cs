@@ -16,6 +16,8 @@ namespace Engineering.Units.Expressions
 
         public override string Representation => Content.Representation;
 
+        internal override bool RequiresBrackets => false;
+
         public override Expression<TOther> Cast<TOther>(Func<T, TOther> f)
             => new ConstantExpression<TOther>(f(Content));
 
