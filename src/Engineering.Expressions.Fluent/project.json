@@ -1,0 +1,39 @@
+{
+    "authors": [
+        "Geoffrey Decan"
+    ],
+    "version": "1.0.0-beta",
+    "buildOptions": {
+        "debugType": "portable"
+    },
+    "dependencies": {
+        "Engineering.Expressions": {
+            "target": "project"
+        }
+    },
+    "frameworks": {
+        "netstandard1.6": {
+            "dependencies": {
+                "NETStandard.Library": "1.6.1"
+            }
+        }
+    },
+    "packOptions": {
+        "summary": "Defines fluent expression operators.",
+        "tags": [
+            "engineering",
+            "expressions"
+        ],
+        "owners": [
+            "Geoffrey Decan"
+        ],
+        "releaseNotes": "Created the data structures for expressions",
+        "projectUrl": "https://github.com/zhofre/engineering",
+        "licenseUrl": "https://github.com/zhofre/engineering/blob/master/LICENSE",
+        "requireLicenseAcceptance": false,
+        "repository": {
+            "type": "git",
+            "url": "https://github.com/zhofre/engineering"
+        }
+    }
+}
