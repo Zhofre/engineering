@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Engineering.Units
+namespace Engineering.Expressions
 {
     internal static class Utility
     {

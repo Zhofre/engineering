@@ -1,6 +1,6 @@
 using System;
 
-namespace Engineering.Units.Expressions
+namespace Engineering.Expressions
 {
     /// <summary>
     ///     Expressions

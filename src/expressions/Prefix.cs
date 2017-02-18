@@ -1,6 +1,6 @@
-using Engineering.Units.Attributes;
+using Engineering.Expressions.Attributes;
 
-namespace Engineering.Units
+namespace Engineering.Expressions
 {
     public enum Prefix
     {

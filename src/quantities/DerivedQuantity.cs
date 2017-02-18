@@ -1,6 +1,6 @@
-using Engineering.Units.Expressions;
+using Engineering.Expressions;
 
-namespace Engineering.Units
+namespace Engineering.Quantities
 {
     public class DerivedQuantity : Quantity, IDerived<IQuantity>
     {

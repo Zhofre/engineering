@@ -1,4 +1,4 @@
-namespace Engineering.Units.Expressions
+namespace Engineering.Expressions
 {
     public abstract class BinaryExpression<T> : Expression<T>
         where T : IExpressible

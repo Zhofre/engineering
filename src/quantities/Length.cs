@@ -1,4 +1,4 @@
-namespace Engineering.Units
+namespace Engineering.Quantities
 {
     public sealed class Length : BaseQuantity
     {

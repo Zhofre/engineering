@@ -1,7 +1,7 @@
 using System;
-using Engineering.Units.Attributes;
+using Engineering.Expressions.Attributes;
 
-namespace Engineering.Units.Expressions
+namespace Engineering.Expressions
 {
     public sealed class PrefixExpression<T> : Expression<T>
         where T : IExpressible

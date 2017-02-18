@@ -2,16 +2,9 @@
   "version": "1.0.0-*",
   "buildOptions": {
     "debugType": "portable",
-    "outputName": "Engineering.Units"
+    "outputName": "Engineering.Expressions"
   },
-  "dependencies": {
-    "expressions" : {
-      "target" : "project"
-    },
-    "quantities" : {
-      "target" : "project"
-    }
-  },
+  "dependencies": {},
   "frameworks": {
     "netstandard1.6": {
       "dependencies": {

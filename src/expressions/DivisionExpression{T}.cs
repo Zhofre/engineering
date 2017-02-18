@@ -1,6 +1,6 @@
 using System;
 
-namespace Engineering.Units.Expressions
+namespace Engineering.Expressions
 {
     public sealed class DivisionExpression<T> : BinaryExpression<T>
         where T : IExpressible

@@ -5,6 +5,12 @@
     "outputName": "Engineering.Measurements"
   },
   "dependencies": {
+    "expressions" : {
+      "target" : "project"
+    },
+    "quantities" : {
+      "target" : "project"
+    },
     "units" : {
       "target" : "project"
     }

@@ -1,9 +1,9 @@
 ﻿using System;
 using Engineering.Measurements;
+using Engineering.Expressions;
 using Engineering.Units;
-using Engineering.Units.Expressions;
 using Engineering.Units.SI;
-using static Engineering.Units.Prefix;
+using static Engineering.Expressions.Prefix;
 
 namespace TestConsole
 {

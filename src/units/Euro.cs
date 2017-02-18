@@ -1,3 +1,5 @@
+using Engineering.Quantities;
+
 namespace Engineering.Units
 {
     public sealed class Euro : BaseUnit

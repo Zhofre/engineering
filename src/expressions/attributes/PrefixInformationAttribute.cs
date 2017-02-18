@@ -1,6 +1,6 @@
 using System;
 
-namespace Engineering.Units.Attributes
+namespace Engineering.Expressions.Attributes
 {
     public class PrefixInformationAttribute : Attribute
     {

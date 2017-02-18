@@ -1,6 +1,6 @@
 using System;
 
-namespace Engineering.Units.Expressions
+namespace Engineering.Expressions
 {
     public sealed class ConstantExpression<T> : Expression<T>
         where T : IExpressible

@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace Engineering.Units.Expressions
+namespace Engineering.Expressions
 {
     public sealed class ExponentExpression<T> : Expression<T>
         where T : IExpressible

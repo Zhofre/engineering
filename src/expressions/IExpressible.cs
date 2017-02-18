@@ -1,4 +1,4 @@
-namespace Engineering.Units.Expressions
+namespace Engineering.Expressions
 {    
     public interface IExpressible
     {
