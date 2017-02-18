@@ -1,0 +1,34 @@
+{
+  "version": "1.0.0-alpha",
+  "buildOptions": {
+    "debugType": "portable"
+  },
+  "dependencies": {
+    "Engineering.Expressions" : {
+      "target" : "project"
+    },
+    "Engineering.Quantities" : {
+      "target" : "project"
+    }
+  },
+  "frameworks": {
+    "netstandard1.6": {
+      "dependencies": {
+        "NETStandard.Library": "1.6.1"
+      }
+    }
+  },
+  "packOptions": {
+    "summary": "Defines units.",
+    "tags": [ "engineering", "expressions", "units", "quantities" ],
+    "owners": [ "Geoffrey Decan" ],
+    "releaseNotes": "Created the data structures for units",
+    "projectUrl": "https://github.com/zhofre/engineering",
+    "licenseUrl": "https://github.com/zhofre/engineering/blob/master/LICENSE",
+    "requireLicenseAcceptance": false,
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/zhofre/engineering"
+    }  
+  }
+}

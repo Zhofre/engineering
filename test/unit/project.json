@@ -8,10 +8,16 @@
     "System.Runtime.Serialization.Primitives": "4.3.0",
     "xunit": "2.1.0",
     "dotnet-test-xunit": "1.0.0-rc2-build10015",
-    "units" : {
+    "Engineering.Expressions" : {
       "target": "project"
     },
-    "measurements" : {
+    "Engineering.Quantities" : {
+      "target": "project"
+    },
+    "Engineering.Units" : {
+      "target": "project"
+    },
+    "Engineering.Measurements" : {
       "target": "project"
     }
   },
