@@ -10,13 +10,13 @@ namespace Engineering.Units
         public DerivedUnit(string name, Expression<IUnit> expression)
             : this(name, null, expression)
         {
-            
+
         }
 
         public DerivedUnit(string name, string notation, Expression<IUnit> expression)
             : this(name, notation, expression, null)
         {
-            
+
         }
 
         public DerivedUnit(string name, string notation, Expression<IUnit> expression, string quantitySymbol)
@@ -30,5 +30,8 @@ namespace Engineering.Units
 
         public sealed override string Notation
             => _customNotation ?? Expression.Representation;
+
+        public bool HasCustomRepresentation => _customNotation != null;
+
     }
 }

@@ -23,5 +23,7 @@ namespace Engineering.Quantities
 
         public sealed override string Symbol
             => _customSymbol ?? Expression.Representation;
+
+        public bool HasCustomRepresentation => _customSymbol != null;
     }
 }

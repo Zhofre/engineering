@@ -1,5 +1,8 @@
 {
-  "version": "1.0.0-alpha",
+  "authors": [
+    "Geoffrey Decan"
+  ],
+  "version": "1.0.0-beta",
   "buildOptions": {
     "debugType": "portable"
   },
