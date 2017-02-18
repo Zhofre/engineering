@@ -8,7 +8,7 @@ namespace Engineering.Expressions
         where T : IExpressible
     {
         public MultiplicationSequenceExpression(Expression<T> first, Expression<T> second, params Expression<T>[] other)
-            : this(new List<Expression<T>> { first, second }.Union(other))
+            : this(new List<Expression<T>> { first, second }.Concat(other))
         {
         }
 

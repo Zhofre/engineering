@@ -32,6 +32,9 @@ namespace TestConsole
             var kg = new DerivedUnit("kilogram", new PrefixExpression<IUnit>(kilo, new Gram()));
             var newton = new DerivedUnit("newton", "N", new MultiplicationExpression<IUnit>(kg, m_s2bis), "F");
             Console.WriteLine($"{newton.Name}: {newton.Notation}={newton.Expression.Representation} [{newton.Quantity.Symbol}]");
+            var sinv = new ExponentExpression<IUnit>(second, -1);
+            var newton2 = new DerivedUnit("newton", "N", new MultiplicationSequenceExpression<IUnit>(kg, meter, sinv, sinv), "F");
+            Console.WriteLine($"{newton2.Name}: {newton2.Notation}={newton2.Expression.Representation} [{newton2.Quantity.Symbol}]");
         }
     }
 }
