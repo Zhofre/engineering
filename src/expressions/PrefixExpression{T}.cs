@@ -16,13 +16,13 @@ namespace Engineering.Expressions
 
         public Prefix Prefix { get; }
 
-        public override bool CanPrefix => Content.CanPrefix;
+        public override bool CanScale => Content.CanScale;
 
         public override string Representation
         {
             get
             {
-                if (!CanPrefix)
+                if (!CanScale)
                     return Content.Representation;
                 var attr = Prefix.GetAttribute<PrefixInformationAttribute>();
                 return (attr?.Symbol ?? "") + Content.Representation;

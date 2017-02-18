@@ -16,7 +16,7 @@ namespace Engineering.Expressions
 
         public Expression<T> Content { get; }
 
-        public override bool CanPrefix => Content.CanPrefix;
+        public override bool CanScale => Content.CanScale;
 
         internal override bool RequiresBrackets => !Utility.Equals(Scale, 1.0);
 
@@ -24,7 +24,7 @@ namespace Engineering.Expressions
         {
             get
             {
-                if (!CanPrefix || Utility.Equals(Scale, 1.0))
+                if (!CanScale || Utility.Equals(Scale, 1.0))
                     return Content.Representation;   
                 return Scale.ToString(CultureInfo.InvariantCulture) + "*" + Content.AutoBracketedRepresentation;
             }

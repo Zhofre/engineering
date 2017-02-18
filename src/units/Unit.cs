@@ -11,7 +11,7 @@ namespace Engineering.Units
             Quantity = quantity;
         }
 
-        bool IExpressible.CanPrefix => true;
+        bool IExpressible.CanScale => true;
         string IExpressible.Representation => Notation;
 
         public string Name { get; }

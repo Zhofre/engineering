@@ -9,7 +9,7 @@ namespace Engineering.Expressions
         where T : IExpressible
     {
         internal abstract bool RequiresBrackets { get; }
-        public abstract bool CanPrefix { get; }
+        public abstract bool CanScale { get; }
         public abstract string Representation { get; }
         public abstract Expression<TOther> Cast<TOther>(Func<T, TOther> f)
             where TOther : IExpressible;

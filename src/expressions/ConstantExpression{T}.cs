@@ -12,7 +12,7 @@ namespace Engineering.Expressions
 
         public T Content { get; }
 
-        public override bool CanPrefix => Content.CanPrefix;
+        public override bool CanScale => Content.CanScale;
 
         public override string Representation => Content.Representation;
 

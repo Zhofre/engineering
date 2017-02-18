@@ -16,7 +16,7 @@ namespace Engineering.Expressions
 
         public Expression<T> Content { get; }
 
-        public override bool CanPrefix => Content.CanPrefix;
+        public override bool CanScale => Content.CanScale;
 
         internal override bool RequiresBrackets => false;
 

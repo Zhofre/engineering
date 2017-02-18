@@ -13,7 +13,7 @@ namespace Engineering.Expressions
 
         public Expression<T> RightHandSide { get; }
 
-        public override bool CanPrefix => LeftHandSide.CanPrefix && RightHandSide.CanPrefix;
+        public override bool CanScale => LeftHandSide.CanScale && RightHandSide.CanScale;
 
         public override string Representation
             => LeftHandSide.AutoBracketedRepresentation 

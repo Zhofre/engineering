@@ -9,7 +9,7 @@ namespace Engineering.Quantities
             Name = name;
         }
 
-        bool IExpressible.CanPrefix => false;
+        bool IExpressible.CanScale => false;
         string IExpressible.Representation => Symbol;
         public string Name { get; }
         public abstract string Symbol { get; }

@@ -21,7 +21,7 @@ namespace Engineering.Expressions
 
         public IReadOnlyCollection<Expression<T>> Content { get; }
 
-        public override bool CanPrefix => Content.First().CanPrefix;
+        public override bool CanScale => Content.First().CanScale;
 
         internal override bool RequiresBrackets => true;
 
