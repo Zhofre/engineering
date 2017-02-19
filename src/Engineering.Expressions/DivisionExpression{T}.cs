@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Engineering.Expressions
 {
-    public sealed class DivisionExpression<T> : BinaryExpression<T>
+    public sealed class DivisionExpression<T> : BinaryExpression<T>, IEquatable<DivisionExpression<T>>
         where T : IExpressible
     {
         public DivisionExpression(Expression<T> lhs, Expression<T> rhs)
@@ -20,7 +20,7 @@ namespace Engineering.Expressions
 
         public override Expression<T> Transform(Func<Expression<T>, Expression<T>> f)
             => new DivisionExpression<T>(f(LeftHandSide), f(RightHandSide));
-            
+
         protected override IEnumerable<Expression<T>> GetDenominatorImpl()
             => new[] { RightHandSide };
 
@@ -31,5 +31,16 @@ namespace Engineering.Expressions
             => 1d;
 
         protected override double GetExponentImpl() => 1d;
+
+        public override bool Equals(Expression<T> other)
+            => Equals(other as DivisionExpression<T>);
+
+        public bool Equals(DivisionExpression<T> other)
+        {
+            if (other == null)
+                return false;
+            return LeftHandSide.Equals(other.LeftHandSide)
+                && RightHandSide.Equals(other.RightHandSide);
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace Engineering.Expressions
 {
-    public sealed class ExponentExpression<T> : UnaryExpression<T>
+    public sealed class ExponentExpression<T> : UnaryExpression<T>, IEquatable<ExponentExpression<T>>
         where T : IExpressible
     {
         public ExponentExpression(Expression<T> expression, double exponent)
@@ -41,5 +41,18 @@ namespace Engineering.Expressions
         protected override double GetScaleImpl() => 1d;
 
         protected override double GetExponentImpl() => Exponent;
+        
+        public sealed override bool Equals(Expression<T> other)
+            => Equals(other as ExponentExpression<T>);
+
+        protected sealed override int GetHashCodeImpl()
+            => base.GetHashCodeImpl() + Exponent.GetHashCode();
+
+        public bool Equals(ExponentExpression<T> other)
+        {
+            if (other == null)
+                return false;
+            return Content.Equals(other.Content) && Utility.Equals(Exponent, other.Exponent);
+        }
     }
 }

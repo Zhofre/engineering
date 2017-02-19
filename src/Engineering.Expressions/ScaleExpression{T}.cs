@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace Engineering.Expressions
 {
-    public sealed class ScaleExpression<T> : UnaryExpression<T>
+    public sealed class ScaleExpression<T> : UnaryExpression<T>, IEquatable<ScaleExpression<T>>
         where T : IExpressible
     {
         public ScaleExpression(double scale, Expression<T> expression)
@@ -43,5 +43,18 @@ namespace Engineering.Expressions
             => Scale;
 
         protected override double GetExponentImpl() => 1d;
+        
+        public sealed override bool Equals(Expression<T> other)
+            => Equals(other as ScaleExpression<T>);
+
+        protected sealed override int GetHashCodeImpl()
+            => base.GetHashCodeImpl() + Scale.GetHashCode();
+
+        public bool Equals(ScaleExpression<T> other)
+        {
+            if (other == null)
+                return false;
+            return Content.Equals(other.Content) && Utility.Equals(Scale, other.Scale);
+        }
     }
 }

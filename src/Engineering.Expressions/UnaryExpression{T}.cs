@@ -11,5 +11,9 @@ namespace Engineering.Expressions
         public Expression<T> Content { get; }
 
         public override bool CanScale => Content.CanScale;
+
+        protected override int GetHashCodeImpl()
+            => Content.GetHashCode();
+                
     }
 }

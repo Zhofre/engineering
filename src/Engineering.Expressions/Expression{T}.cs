@@ -6,7 +6,7 @@ namespace Engineering.Expressions
     /// <summary>
     ///     Expressions
     /// </summary>
-    public abstract class Expression<T> : IExpressible, IClassifiable<T>
+    public abstract class Expression<T> : IExpressible, IClassifiable<T>, IEquatable<Expression<T>>
         where T : IExpressible
     {
         internal abstract bool RequiresBrackets { get; }
@@ -45,5 +45,17 @@ namespace Engineering.Expressions
 
         IEnumerable<Expression<T>> IClassifiable<T>.GetDenominator() => GetDenominatorImpl();
         protected abstract IEnumerable<Expression<T>> GetDenominatorImpl();
+
+        public abstract bool Equals(Expression<T> other);
+
+        public sealed override bool Equals(object other)
+            => Equals(other as Expression<T>);
+
+        public sealed override int GetHashCode() => GetHashCodeImpl();
+        protected abstract int GetHashCodeImpl();
+
+        public bool Equals(IExpressible other)
+            => Equals(other as Expression<T>);
+
     }
 }

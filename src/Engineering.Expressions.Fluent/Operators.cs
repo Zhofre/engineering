@@ -13,12 +13,12 @@ namespace Engineering.Expressions.Fluent
         public static Expression<T> Expand<T>(this Expression<T> expression, ExpandOptions options = ExpandOptions.Normal)
             where T : IExpressible
         {
-            switch(options)
+            switch (options)
             {
-                case ExpandOptions.Normal : return ExpandTool.Normal(expression);
-                case ExpandOptions.Normal | ExpandOptions.PrefixToScale : return ExpandTool.Normal(expression, true);
-                case ExpandOptions.Aggressive : return ExpandTool.Aggressive(expression);
-                case ExpandOptions.Aggressive | ExpandOptions.PrefixToScale : return ExpandTool.Aggressive(expression, true);
+                case ExpandOptions.Normal: return ExpandTool.Normal(expression);
+                case ExpandOptions.Normal | ExpandOptions.PrefixToScale: return ExpandTool.Normal(expression, true);
+                case ExpandOptions.Aggressive: return ExpandTool.Aggressive(expression);
+                case ExpandOptions.Aggressive | ExpandOptions.PrefixToScale: return ExpandTool.Aggressive(expression, true);
                 default: throw new NotImplementedException($"Unknown expansion options combination {options}");
             }
         }
@@ -26,8 +26,14 @@ namespace Engineering.Expressions.Fluent
         public static Expression<T> Simplify<T>(this Expression<T> expression, SimplifyOptions options = SimplifyOptions.Normal)
             where T : IExpressible
         {
-            var initial = SimplifyTool.Normal(expression);
-            throw new NotImplementedException();
+            var res = SimplifyTool.Normal(expression);
+
+            if ((options & SimplifyOptions.SimplifyPrefixes) == SimplifyOptions.SimplifyPrefixes)
+            {
+                throw new NotImplementedException();
+            }
+
+            return res;
         }
     }
 }

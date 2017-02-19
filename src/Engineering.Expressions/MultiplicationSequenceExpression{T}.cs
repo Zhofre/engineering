@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Engineering.Expressions
 {
-    public sealed class MultiplicationSequenceExpression<T> : SequenceExpression<T>
+    public sealed class MultiplicationSequenceExpression<T> : SequenceExpression<T>, IEquatable<MultiplicationSequenceExpression<T>>
         where T : IExpressible
     {
         public MultiplicationSequenceExpression(Expression<T> first, Expression<T> second, params Expression<T>[] other)
@@ -42,5 +42,23 @@ namespace Engineering.Expressions
             => 1d;
 
         protected override double GetExponentImpl() => 1d;
+        
+        public override bool Equals(Expression<T> other)
+            => Equals(other as MultiplicationSequenceExpression<T>);
+
+        public bool Equals(MultiplicationSequenceExpression<T> other)
+        {
+            if (other == null)
+                return false;
+
+            var res = Content.Count == other.Content.Count;
+            var i = 0;
+            while (res && i < Content.Count)
+            {
+                res = Content.ElementAt(i).Equals(other.Content.ElementAt(i));
+                i++;
+            }
+            return res;
+        }
     }
 }

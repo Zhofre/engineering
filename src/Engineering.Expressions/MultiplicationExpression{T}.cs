@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Engineering.Expressions
 {
-    public sealed class MultiplicationExpression<T> : BinaryExpression<T>
+    public sealed class MultiplicationExpression<T> : BinaryExpression<T>, IEquatable<MultiplicationExpression<T>>
         where T : IExpressible
     {
         public MultiplicationExpression(Expression<T> lhs, Expression<T> rhs)
@@ -31,5 +31,16 @@ namespace Engineering.Expressions
             => 1d;
 
         protected override double GetExponentImpl() => 1d;
+        
+        public override bool Equals(Expression<T> other)
+            => Equals(other as MultiplicationExpression<T>);
+
+        public bool Equals(MultiplicationExpression<T> other)
+        {
+            if (other == null)
+                return false;
+            return LeftHandSide.Equals(other.LeftHandSide)
+                && RightHandSide.Equals(other.RightHandSide);
+        }
     }
 }

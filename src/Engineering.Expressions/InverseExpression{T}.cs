@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Engineering.Expressions
 {
-    public sealed class InverseExpression<T> : UnaryExpression<T>
+    public sealed class InverseExpression<T> : UnaryExpression<T>, IEquatable<InverseExpression<T>>
         where T : IExpressible
     {
         public InverseExpression(Expression<T> expression)
@@ -31,5 +31,15 @@ namespace Engineering.Expressions
             => 1d;
 
         protected override double GetExponentImpl() => 1d;
+        
+        public sealed override bool Equals(Expression<T> other)
+            => Equals(other as InverseExpression<T>);
+            
+        public bool Equals(InverseExpression<T> other)
+        {
+            if (other == null)
+                return false;
+            return Content.Equals(other.Content);
+        }
     }
 }

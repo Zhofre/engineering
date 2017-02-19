@@ -15,6 +15,9 @@ namespace Engineering.Expressions
 
         public override bool CanScale => Content.First().CanScale;
 
+        protected override int GetHashCodeImpl()
+            => Content.GetHashCode();
+
     }
     
 }

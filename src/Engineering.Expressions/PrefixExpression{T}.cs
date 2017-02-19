@@ -4,7 +4,7 @@ using Engineering.Expressions.Attributes;
 
 namespace Engineering.Expressions
 {
-    public sealed class PrefixExpression<T> : UnaryExpression<T>
+    public sealed class PrefixExpression<T> : UnaryExpression<T>, IEquatable<PrefixExpression<T>>
         where T : IExpressible
     {
         public PrefixExpression(Prefix p, Expression<T> expression)
@@ -44,5 +44,19 @@ namespace Engineering.Expressions
             => Prefix.Value();
 
         protected override double GetExponentImpl() => 1d;
+        
+        public sealed override bool Equals(Expression<T> other)
+            => Equals(other as PrefixExpression<T>);
+
+        protected sealed override int GetHashCodeImpl()
+            => base.GetHashCodeImpl() + Prefix.GetHashCode();
+
+        public bool Equals(PrefixExpression<T> other)
+        {
+            if (other == null)
+                return false;
+            return Content.Equals(other.Content) 
+                && (Prefix == other.Prefix);
+        }
     }
 }
