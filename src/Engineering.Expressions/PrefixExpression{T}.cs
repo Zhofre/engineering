@@ -4,20 +4,16 @@ using Engineering.Expressions.Attributes;
 
 namespace Engineering.Expressions
 {
-    public sealed class PrefixExpression<T> : Expression<T>
+    public sealed class PrefixExpression<T> : UnaryExpression<T>
         where T : IExpressible
     {
         public PrefixExpression(Prefix p, Expression<T> expression)
+            : base(expression)
         {
             Prefix = p;
-            Content = expression;
         }
 
-        public Expression<T> Content { get; }
-
         public Prefix Prefix { get; }
-
-        public override bool CanScale => Content.CanScale;
 
         public override string Representation
         {
@@ -34,6 +30,9 @@ namespace Engineering.Expressions
 
         public override Expression<TOther> Cast<TOther>(Func<T, TOther> f)
             => new PrefixExpression<TOther>(Prefix, Content.Cast(f));
+
+        public override Expression<T> Transform(Func<Expression<T>, Expression<T>> f)
+            => new PrefixExpression<T>(Prefix, f(Content));
 
         protected override IEnumerable<Expression<T>> GetDenominatorImpl()
             => null;

@@ -18,6 +18,9 @@ namespace Engineering.Expressions
         public override Expression<TOther> Cast<TOther>(Func<T, TOther> f)
             => new DivisionExpression<TOther>(LeftHandSide.Cast(f), RightHandSide.Cast(f));
 
+        public override Expression<T> Transform(Func<Expression<T>, Expression<T>> f)
+            => new DivisionExpression<T>(f(LeftHandSide), f(RightHandSide));
+            
         protected override IEnumerable<Expression<T>> GetDenominatorImpl()
             => new[] { RightHandSide };
 

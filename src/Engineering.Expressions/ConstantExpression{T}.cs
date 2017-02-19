@@ -22,6 +22,9 @@ namespace Engineering.Expressions
         public override Expression<TOther> Cast<TOther>(Func<T, TOther> f)
             => new ConstantExpression<TOther>(f(Content));
 
+        public override Expression<T> Transform(Func<Expression<T>, Expression<T>> f)
+            => new ConstantExpression<T>(Content); // <- does nothing
+
         protected override IEnumerable<Expression<T>> GetDenominatorImpl()
             => null;
 

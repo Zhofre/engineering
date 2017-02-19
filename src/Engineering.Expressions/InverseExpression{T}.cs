@@ -3,17 +3,13 @@ using System.Collections.Generic;
 
 namespace Engineering.Expressions
 {
-    public sealed class InverseExpression<T> : Expression<T>
+    public sealed class InverseExpression<T> : UnaryExpression<T>
         where T : IExpressible
     {
         public InverseExpression(Expression<T> expression)
+            : base (expression)
         {
-            Content = expression;
         }
-
-        public Expression<T> Content { get; }
-
-        public override bool CanScale => Content.CanScale;
 
         internal override bool RequiresBrackets => true;
 
@@ -21,6 +17,9 @@ namespace Engineering.Expressions
 
         public override Expression<TOther> Cast<TOther>(Func<T, TOther> f)
             => new InverseExpression<TOther>(Content.Cast(f));
+
+        public override Expression<T> Transform(Func<Expression<T>, Expression<T>> f)
+            => new InverseExpression<T>(f(Content));
               
         protected override IEnumerable<Expression<T>> GetDenominatorImpl()
             => new[] { Content };

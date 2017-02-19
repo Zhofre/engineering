@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Engineering.Expressions
 {
-    public sealed class MultiplicationSequenceExpression<T> : Expression<T>
+    public sealed class MultiplicationSequenceExpression<T> : SequenceExpression<T>
         where T : IExpressible
     {
         public MultiplicationSequenceExpression(Expression<T> first, Expression<T> second, params Expression<T>[] other)
@@ -13,15 +13,11 @@ namespace Engineering.Expressions
         }
 
         public MultiplicationSequenceExpression(IEnumerable<Expression<T>> expressions)
+            : base(expressions)
         {
             if (expressions.Count() < 2)
                 throw new ArgumentException("Requires at least two expressions");
-            Content = expressions.ToList().AsReadOnly();
         }
-
-        public IReadOnlyCollection<Expression<T>> Content { get; }
-
-        public override bool CanScale => Content.First().CanScale;
 
         internal override bool RequiresBrackets => true;
 
@@ -33,6 +29,9 @@ namespace Engineering.Expressions
         public override Expression<TOther> Cast<TOther>(Func<T, TOther> f)
             => new MultiplicationSequenceExpression<TOther>(Content.Select(x => x.Cast(f)));
    
+        public override Expression<T> Transform(Func<Expression<T>, Expression<T>> f)
+            => new MultiplicationSequenceExpression<T>(Content.Select(x => f(x)));
+
         protected override IEnumerable<Expression<T>> GetDenominatorImpl()
             => null;
 

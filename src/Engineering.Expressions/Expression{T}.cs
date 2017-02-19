@@ -14,6 +14,7 @@ namespace Engineering.Expressions
         public abstract string Representation { get; }
         public abstract Expression<TOther> Cast<TOther>(Func<T, TOther> f)
             where TOther : IExpressible;
+        public abstract Expression<T> Transform(Func<Expression<T>, Expression<T>> f);
 
         public static implicit operator Expression<T>(T other)
         {

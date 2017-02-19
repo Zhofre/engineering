@@ -4,20 +4,16 @@ using System.Globalization;
 
 namespace Engineering.Expressions
 {
-    public sealed class ScaleExpression<T> : Expression<T>
+    public sealed class ScaleExpression<T> : UnaryExpression<T>
         where T : IExpressible
     {
         public ScaleExpression(double scale, Expression<T> expression)
+            : base(expression)
         {
             Scale = scale;
-            Content = expression;
         }
 
         public double Scale { get; }
-
-        public Expression<T> Content { get; }
-
-        public override bool CanScale => Content.CanScale;
 
         internal override bool RequiresBrackets => !Utility.Equals(Scale, 1.0);
 
@@ -34,6 +30,9 @@ namespace Engineering.Expressions
         public override Expression<TOther> Cast<TOther>(Func<T, TOther> f)
             => new ScaleExpression<TOther>(Scale, Content.Cast(f));
                
+        public override Expression<T> Transform(Func<Expression<T>, Expression<T>> f)
+            => new ScaleExpression<T>(Scale, f(Content));
+
         protected override IEnumerable<Expression<T>> GetDenominatorImpl()
             => null;
 

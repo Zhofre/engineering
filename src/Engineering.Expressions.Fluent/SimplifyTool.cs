@@ -8,6 +8,9 @@ namespace Engineering.Expressions.Fluent
             where T : IExpressible
         {
             // drill down into the expression and simplify where possible
+            var classifiedExpression = expression as IClassifiable<T>;
+            
+
 
             
             throw new NotImplementedException();
