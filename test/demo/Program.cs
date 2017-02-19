@@ -1,9 +1,11 @@
 ﻿using System;
 using Engineering.Measurements;
 using Engineering.Expressions;
+using Engineering.Expressions.Fluent;
 using Engineering.Units;
 using Engineering.Units.SI;
 using static Engineering.Expressions.Prefix;
+using static Engineering.Expressions.Fluent.ExpandOptions;
 
 namespace TestConsole
 {
@@ -12,7 +14,17 @@ namespace TestConsole
         public static void Main(string[] args)
         {
             Console.WriteLine("Units demo code");
+            
+            DerivedUnits();
+            ExpressionExpanding();
             // todo: provide demo code
+            
+            
+        }
+
+        private static void DerivedUnits()
+        {
+            Console.WriteLine("Deriving units demo:");
             var t = 5.0.Meters();
             Console.WriteLine($"Extension test: {t}");
             var meter = new Meter();
@@ -36,5 +48,37 @@ namespace TestConsole
             var newton2 = new DerivedUnit("newton", "N", new MultiplicationSequenceExpression<IUnit>(kg, meter, sinv, sinv), "F");
             Console.WriteLine($"{newton2.Name}: {newton2.Notation}={newton2.Expression.Representation} [{newton2.Quantity.Symbol}]");
         }
+
+        private static void ExpressionExpanding()
+        {
+            Console.WriteLine("Expression expand demo:");
+            var meter = new Meter();
+            var second = new Second();
+            var kg = new DerivedUnit("kilogram", new PrefixExpression<IUnit>(kilo, new Gram()));
+            var m_s2 = new DerivedUnit("acceleration", new DivisionExpression<IUnit>(meter, new ExponentExpression<IUnit>(second, 2)));
+            var newton = new DerivedUnit("newton", "N", new MultiplicationExpression<IUnit>(kg, m_s2), "F");
+            Console.WriteLine($"{newton.Name}: {newton.Notation}={newton.Expression.Representation} [{newton.Quantity.Symbol}]");
+            var millimeter = new DerivedUnit("millimeter", milli * meter);
+            var millimeter2 = new ExponentExpression<IUnit>(millimeter, 2d);
+            var megapascals = new DerivedUnit("megapascals", "MPa", new DivisionExpression<IUnit>(newton, millimeter2));
+            Console.WriteLine($"{megapascals.Name}: {megapascals.Notation}={megapascals.Expression.Representation} [{megapascals.Quantity.Symbol}]");
+
+            Console.WriteLine($"Original {millimeter2.Representation}");
+            var normalExpansion1 = millimeter2.Expand();
+            var normalPrefixExpansion1 = millimeter2.Expand(PrefixToScale);
+            var aggressiveExpansion1 = millimeter2.Expand(Aggressive);
+            var aggressivePrefixExpansion1 = millimeter2.Expand(Aggressive | PrefixToScale);
+            Console.WriteLine($"Normal: {normalExpansion1.Representation} == {normalPrefixExpansion1.Representation}");
+            Console.WriteLine($"Aggressive: {aggressiveExpansion1.Representation} == {aggressivePrefixExpansion1.Representation}");            
+
+            Console.WriteLine($"Original {megapascals.Expression.Representation}");
+            var normalExpansion2 = megapascals.Expression.Expand();
+            var normalPrefixExpansion2 = megapascals.Expression.Expand(PrefixToScale);
+            var aggressiveExpansion2 = megapascals.Expression.Expand(Aggressive);
+            var aggressivePrefixExpansion2 = megapascals.Expression.Expand(Aggressive | PrefixToScale);
+            Console.WriteLine($"Normal: {normalExpansion2.Representation} == {normalPrefixExpansion2.Representation}");
+            Console.WriteLine($"Aggressive: {aggressiveExpansion2.Representation} == {aggressivePrefixExpansion2.Representation}");            
+        }
+        
     }
 }

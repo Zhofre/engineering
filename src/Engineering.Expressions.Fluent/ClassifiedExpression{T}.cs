@@ -10,7 +10,7 @@ namespace Engineering.Expressions.Fluent
     {
         public ClassifiedExpression(Expression<T> expression, bool expandPrefix)
         {
-            if (expression is PrefixExpression<T> || !expandPrefix)
+            if (expression is PrefixExpression<T> && !expandPrefix)
             {
                 Numerator.Add(expression);
                 return;

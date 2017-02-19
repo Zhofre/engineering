@@ -16,9 +16,9 @@ namespace Engineering.Expressions.Fluent
             switch(options)
             {
                 case ExpandOptions.Normal : return ExpandTool.Normal(expression);
-                case ExpandOptions.Normal | ExpandOptions.Prefix : return ExpandTool.Normal(expression, true);
-                case ExpandOptions.Aggresive : return ExpandTool.Aggresive(expression);
-                case ExpandOptions.Aggresive | ExpandOptions.Prefix : return ExpandTool.Normal(expression, true);
+                case ExpandOptions.Normal | ExpandOptions.PrefixToScale : return ExpandTool.Normal(expression, true);
+                case ExpandOptions.Aggressive : return ExpandTool.Aggressive(expression);
+                case ExpandOptions.Aggressive | ExpandOptions.PrefixToScale : return ExpandTool.Aggressive(expression, true);
                 default: throw new NotImplementedException($"Unknown expansion options combination {options}");
             }
         }
