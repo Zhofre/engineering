@@ -3,26 +3,30 @@ using System.Collections.Generic;
 
 namespace Engineering.Expressions
 {
-    public sealed class MultiplicationExpression<T> : BinaryExpression<T>
+    public sealed class InverseExpression<T> : Expression<T>
         where T : IExpressible
     {
-        public MultiplicationExpression(Expression<T> lhs, Expression<T> rhs)
-            : base(lhs, rhs)
+        public InverseExpression(Expression<T> expression)
         {
+            Content = expression;
         }
+
+        public Expression<T> Content { get; }
+
+        public override bool CanScale => Content.CanScale;
 
         internal override bool RequiresBrackets => true;
 
-        protected override string OperatorSymbol => "*";
+        public override string Representation => $"1/{Content.AutoBracketedRepresentation}";
 
         public override Expression<TOther> Cast<TOther>(Func<T, TOther> f)
-            => new MultiplicationExpression<TOther>(LeftHandSide.Cast(f), RightHandSide.Cast(f));
-               
+            => new InverseExpression<TOther>(Content.Cast(f));
+              
         protected override IEnumerable<Expression<T>> GetDenominatorImpl()
-            => null;
+            => new[] { Content };
 
         protected override IEnumerable<Expression<T>> GetNumeratorImpl()
-            => new[] { LeftHandSide, RightHandSide };
+            => null;
 
         protected override double GetScaleImpl()
             => 1d;

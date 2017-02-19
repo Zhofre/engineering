@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Engineering.Expressions
 {
@@ -16,5 +17,16 @@ namespace Engineering.Expressions
 
         public override Expression<TOther> Cast<TOther>(Func<T, TOther> f)
             => new DivisionExpression<TOther>(LeftHandSide.Cast(f), RightHandSide.Cast(f));
+
+        protected override IEnumerable<Expression<T>> GetDenominatorImpl()
+            => new[] { RightHandSide };
+
+        protected override IEnumerable<Expression<T>> GetNumeratorImpl()
+            => new[] { LeftHandSide };
+
+        protected override double GetScaleImpl()
+            => 1d;
+
+        protected override double GetExponentImpl() => 1d;
     }
 }

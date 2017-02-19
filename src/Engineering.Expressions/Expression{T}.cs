@@ -1,11 +1,12 @@
 using System;
+using System.Collections.Generic;
 
 namespace Engineering.Expressions
 {
     /// <summary>
     ///     Expressions
     /// </summary>
-    public abstract class Expression<T> : IExpressible
+    public abstract class Expression<T> : IExpressible, IClassifiable<T>
         where T : IExpressible
     {
         internal abstract bool RequiresBrackets { get; }
@@ -32,5 +33,16 @@ namespace Engineering.Expressions
 
         internal string AutoBracketedRepresentation
             => RequiresBrackets ? BracketedRepresentation : Representation;
+
+        double IClassifiable<T>.GetExponent() => GetExponentImpl();
+        protected abstract double GetExponentImpl();
+        double IClassifiable<T>.GetScale() => GetScaleImpl();
+        protected abstract double GetScaleImpl();
+
+        IEnumerable<Expression<T>> IClassifiable<T>.GetNumerator() => GetNumeratorImpl();
+        protected abstract IEnumerable<Expression<T>> GetNumeratorImpl();
+
+        IEnumerable<Expression<T>> IClassifiable<T>.GetDenominator() => GetDenominatorImpl();
+        protected abstract IEnumerable<Expression<T>> GetDenominatorImpl();
     }
 }

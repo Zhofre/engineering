@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Engineering.Expressions.Attributes;
 
 namespace Engineering.Expressions
@@ -33,5 +34,16 @@ namespace Engineering.Expressions
 
         public override Expression<TOther> Cast<TOther>(Func<T, TOther> f)
             => new PrefixExpression<TOther>(Prefix, Content.Cast(f));
+
+        protected override IEnumerable<Expression<T>> GetDenominatorImpl()
+            => null;
+
+        protected override IEnumerable<Expression<T>> GetNumeratorImpl()
+            => new[] { Content };
+
+        protected override double GetScaleImpl()
+            => Prefix.Value();
+
+        protected override double GetExponentImpl() => 1d;
     }
 }

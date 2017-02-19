@@ -32,6 +32,16 @@ namespace Engineering.Expressions
 
         public override Expression<TOther> Cast<TOther>(Func<T, TOther> f)
             => new MultiplicationSequenceExpression<TOther>(Content.Select(x => x.Cast(f)));
+   
+        protected override IEnumerable<Expression<T>> GetDenominatorImpl()
+            => null;
 
+        protected override IEnumerable<Expression<T>> GetNumeratorImpl()
+            => Content;
+
+        protected override double GetScaleImpl()
+            => 1d;
+
+        protected override double GetExponentImpl() => 1d;
     }
 }
