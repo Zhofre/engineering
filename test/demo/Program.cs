@@ -68,16 +68,16 @@ namespace TestConsole
             var normalPrefixExpansion1 = millimeter2.Expand(PrefixToScale);
             var aggressiveExpansion1 = millimeter2.Expand(Aggressive);
             var aggressivePrefixExpansion1 = millimeter2.Expand(Aggressive | PrefixToScale);
-            Console.WriteLine($"Normal: {normalExpansion1.Representation} == {normalPrefixExpansion1.Representation}");
-            Console.WriteLine($"Aggressive: {aggressiveExpansion1.Representation} == {aggressivePrefixExpansion1.Representation}");            
+            Console.WriteLine($" - Normal: {normalExpansion1.Representation} == {normalPrefixExpansion1.Representation}");
+            Console.WriteLine($" - Aggressive: {aggressiveExpansion1.Representation} == {aggressivePrefixExpansion1.Representation}");            
 
             Console.WriteLine($"Original {megapascals.Expression.Representation}");
             var normalExpansion2 = megapascals.Expression.Expand();
             var normalPrefixExpansion2 = megapascals.Expression.Expand(PrefixToScale);
             var aggressiveExpansion2 = megapascals.Expression.Expand(Aggressive);
             var aggressivePrefixExpansion2 = megapascals.Expression.Expand(Aggressive | PrefixToScale);
-            Console.WriteLine($"Normal: {normalExpansion2.Representation} == {normalPrefixExpansion2.Representation}");
-            Console.WriteLine($"Aggressive: {aggressiveExpansion2.Representation} == {aggressivePrefixExpansion2.Representation}");            
+            Console.WriteLine($" - Normal: {normalExpansion2.Representation} == {normalPrefixExpansion2.Representation}");
+            Console.WriteLine($" - Aggressive: {aggressiveExpansion2.Representation} == {aggressivePrefixExpansion2.Representation}");            
         }
         
     }

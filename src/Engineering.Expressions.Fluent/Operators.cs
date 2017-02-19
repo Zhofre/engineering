@@ -22,5 +22,12 @@ namespace Engineering.Expressions.Fluent
                 default: throw new NotImplementedException($"Unknown expansion options combination {options}");
             }
         }
+
+        public static Expression<T> Simplify<T>(this Expression<T> expression, SimplifyOptions options = SimplifyOptions.Normal)
+            where T : IExpressible
+        {
+            var initial = SimplifyTool.Normal(expression);
+            throw new NotImplementedException();
+        }
     }
 }

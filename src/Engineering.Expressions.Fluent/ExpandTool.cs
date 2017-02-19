@@ -37,10 +37,10 @@ namespace Engineering.Expressions.Fluent
             var fac = factors ?? new List<Expression<T>>();
             switch (fac.Count)
             {
-                case 0 : return null;
-                case 1 : return fac[0].AutoExponent(exponent);
-                case 2 : return new MultiplicationExpression<T>(fac[0].AutoExponent(exponent), fac[1].AutoExponent(exponent));
-                default : return new MultiplicationSequenceExpression<T>(fac.Select(x => x.AutoExponent(exponent)));
+                case 0: return null;
+                case 1: return fac[0].AutoExponent(exponent);
+                case 2: return new MultiplicationExpression<T>(fac[0].AutoExponent(exponent), fac[1].AutoExponent(exponent));
+                default: return new MultiplicationSequenceExpression<T>(fac.Select(x => x.AutoExponent(exponent)));
             }
         }
 
@@ -50,10 +50,14 @@ namespace Engineering.Expressions.Fluent
             var num = BuildExpression(numerator, exponent);
             var den = BuildExpression(denominator, exponent);
 
-            if (num == null)
+            if ((num == null || num is EmptyExpression<T>)
+                && (den == null || den is EmptyExpression<T>))
+                return new EmptyExpression<T>();
+
+            if (num == null || num is EmptyExpression<T>)
                 return new InverseExpression<T>(den);
-            if (den == null)
-                return num;            
+            if (den == null || den is EmptyExpression<T>)
+                return num;
             return new DivisionExpression<T>(num, den);
         }
 
@@ -63,12 +67,16 @@ namespace Engineering.Expressions.Fluent
                 : new ScaleExpression<T>(Math.Pow(scale, exponent), expression);
 
         private static Expression<T> AutoExponent<T>(this Expression<T> expression, double exponent) where T : IExpressible
-            => Utility.Equals(exponent, 1d)
-                ? expression
-                : new ExponentExpression<T>(expression, exponent);
+            => expression is EmptyExpression<T>
+                ? expression 
+                : Utility.Equals(exponent, 1d)
+                    ? expression
+                    : new ExponentExpression<T>(expression, exponent);
 
         private static bool IsBaseExpression<T>(this Expression<T> expression, bool expandPrefix) where T : IExpressible
-            => expression is ConstantExpression<T> || (!expandPrefix && expression is PrefixExpression<T>);
+            => expression is EmptyExpression<T>
+                || expression is ConstantExpression<T>
+                || (!expandPrefix && expression is PrefixExpression<T>);
 
         internal static ClassifiedExpression<T> Convert<T>(this Expression<T> expression, bool expandPrefix, bool recursive)
             where T : IExpressible

@@ -34,14 +34,12 @@ namespace Engineering.Expressions
         public override Expression<TOther> Cast<TOther>(Func<T, TOther> f)
             => new ExponentExpression<TOther>(Content.Cast(f), Exponent);
             
-        protected override IEnumerable<Expression<T>> GetDenominatorImpl()
-            => null;
+        protected override IEnumerable<Expression<T>> GetDenominatorImpl() => null;
 
         protected override IEnumerable<Expression<T>> GetNumeratorImpl()
             => new[] { Content };
 
-        protected override double GetScaleImpl()
-            => 1d;
+        protected override double GetScaleImpl() => 1d;
 
         protected override double GetExponentImpl() => Exponent;
     }
