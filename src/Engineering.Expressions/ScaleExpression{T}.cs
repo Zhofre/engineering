@@ -23,7 +23,7 @@ namespace Engineering.Expressions
             {
                 if (!CanScale || Utility.Equals(Scale, 1.0))
                     return Content.Representation;   
-                return Scale.ToString("E3", CultureInfo.InvariantCulture) + "*" + Content.AutoBracketedRepresentation;
+                return Scale.ToString(CultureInfo.InvariantCulture) + "*" + Content.AutoBracketedRepresentation;
             }
         }
 
