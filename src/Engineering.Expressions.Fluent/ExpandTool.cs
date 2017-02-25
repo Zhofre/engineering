@@ -72,12 +72,7 @@ namespace Engineering.Expressions.Fluent
                 : Utility.Equals(exponent, 1d)
                     ? expression
                     : new ExponentExpression<T>(expression, exponent);
-
-        private static bool IsBaseExpression<T>(this Expression<T> expression, bool expandPrefix) where T : IExpressible
-            => expression is EmptyExpression<T>
-                || expression is ConstantExpression<T>
-                || (!expandPrefix && expression is PrefixExpression<T>);
-
+        
         internal static ClassifiedExpression<T> Convert<T>(this Expression<T> expression, bool expandPrefix, bool recursive)
             where T : IExpressible
         {

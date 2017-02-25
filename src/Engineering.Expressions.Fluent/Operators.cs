@@ -23,6 +23,14 @@ namespace Engineering.Expressions.Fluent
             }
         }
 
+        /// <summary>
+        ///     Method to remove unnecessary parentheses in chained multiplications (a*(b*c)*d) -> (a*b*c*d)
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public static Expression<T> EliminateParentheses<T>(this Expression<T> expression) where T : IExpressible
+            => ParenthesesTool.EliminateParentheses(expression.Transform(EliminateParentheses));
+
         public static Expression<T> Simplify<T>(this Expression<T> expression, SimplifyOptions options = SimplifyOptions.Normal)
             where T : IExpressible
         {

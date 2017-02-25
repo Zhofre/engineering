@@ -1,11 +1,11 @@
-﻿using Xunit;
+using Xunit;
 
 namespace Engineering.Tests
 {
-    public class TestUnits
+    public class EliminateParentheseTests
     {
         [Fact]
-        public void Example() 
+        public void Example()
         {
             Assert.True(true);
         }

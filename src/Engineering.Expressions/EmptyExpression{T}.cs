@@ -27,7 +27,6 @@ namespace Engineering.Expressions
 
         protected override double GetScaleImpl() => 1d;
 
-
         public override bool Equals(Expression<T> other)
             => Equals(other as EmptyExpression<T>);
 

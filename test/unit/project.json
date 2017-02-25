@@ -11,6 +11,9 @@
     "Engineering.Expressions" : {
       "target": "project"
     },
+    "Engineering.Expressions.Fluent" : {
+      "target": "project"
+    },
     "Engineering.Quantities" : {
       "target": "project"
     },
