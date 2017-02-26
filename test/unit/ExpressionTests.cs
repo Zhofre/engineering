@@ -180,5 +180,31 @@ namespace Engineering.Tests
             Assert.Equal("1/T", result);
         }
 
+        [Fact]
+        public void ComplexExpressionRepresentation1()
+        {
+            var l = new Length();
+            var t = new Time();
+            var expr1 = new DivisionExpression<IQuantity>(l, t);
+            var sut = new MultiplicationExpression<IQuantity>(t, expr1);
+
+            var result = sut.Representation;
+
+            Assert.Equal("T*(L/T)", result);
+        }
+
+        [Fact]
+        public void ComplexExpressionRepresentation2()
+        {
+            var l = new Length();
+            var t = new Time();
+            var expr1 = new ExponentExpression<IQuantity>(t, 2);
+            var sut = new DivisionExpression<IQuantity>(l, expr1);
+
+            var result = sut.Representation;
+
+            Assert.Equal("L/T^2", result);
+        }
+
     }
 }
