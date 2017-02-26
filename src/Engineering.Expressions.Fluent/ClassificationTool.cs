@@ -12,6 +12,8 @@ namespace Engineering.Expressions.Fluent
             => expression is MultiplicationExpression<T>
             || expression is MultiplicationSequenceExpression<T>;
 
+        
+        // todo: implement grouping by base
 
     }
 }
