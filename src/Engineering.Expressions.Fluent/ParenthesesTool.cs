@@ -24,8 +24,11 @@ namespace Engineering.Expressions.Fluent
             foreach (var p in parts)
             {
                 if (!p.IsMultiplication())
+                {
                     result.Add(p);
-
+                    continue;
+                }
+                
                 var classifiedExpression2 = p as IClassifiable<T>;
                 result.AddRange(classifiedExpression2.GetNumerator());
             }
