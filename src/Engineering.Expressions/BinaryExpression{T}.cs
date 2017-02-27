@@ -21,5 +21,8 @@ namespace Engineering.Expressions
                 + RightHandSide.AutoBracketedRepresentation;
 
         protected abstract string OperatorSymbol { get; }
+
+        protected override int GetHashCodeImpl()
+            => LeftHandSide.GetHashCode()*17 + RightHandSide.GetHashCode();
     }
 }

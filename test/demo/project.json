@@ -6,16 +6,19 @@
     "emitEntryPoint": true
   },
   "dependencies": {
-    "Engineering.Expressions" : {
+    "Engineering.Expressions": {
       "target": "project"
     },
-    "Engineering.Quantities" : {
+    "Engineering.Quantities": {
       "target": "project"
     },
-    "Engineering.Units" : {
+    "Engineering.Units": {
       "target": "project"
     },
-    "Engineering.Measurements" : {
+    "Engineering.Measurements": {
+      "target": "project"
+    },
+    "Engineering.Expressions.Fluent": {
       "target": "project"
     }
   },
