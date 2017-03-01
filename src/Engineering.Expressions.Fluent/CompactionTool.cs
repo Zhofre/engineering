@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Engineering.Expressions.Fluent
 {
     internal static class CompactionTool
