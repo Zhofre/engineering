@@ -42,5 +42,19 @@ namespace Engineering.Tests
             Assert.Equal(expectedResult, result);
         }
 
+        [Fact]
+        public void ExtractConstantExpression()
+        {
+            var l = new Length();
+            var complex = l.Constant()
+                .Scale(0.5)
+                .RaiseTo(2d);
+
+            var content = complex.ExtractConstantExpression()?.Content;
+
+            Assert.NotNull(content);
+            Assert.Equal(l, content);
+        }
+
     }
 }
