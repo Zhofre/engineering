@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Engineering.Expressions.Fluent
 {
@@ -15,8 +16,15 @@ namespace Engineering.Expressions.Fluent
 
         public List<Expression<T>> Expressions { get; }
 
-        public void Compact()
+        public void Compact(bool expandPrefixesIfConflicting)
         {
+            // recognize different unary items and compact them
+            var result = Expressions.Select(x => x.Expand(ExpandOptions.Aggressive));
+
+
+          // todo: build new expansion option that preserves simple prefixes
+
+
             // todo implement compaction logic
         }
 
