@@ -21,14 +21,14 @@ namespace Engineering.Expressions.Fluent
                 var modifiedExpression = new ExponentExpression<T>(expExpression.Content, -expExpression.Exponent);
                 numer.Add(modifiedExpression);
             }
-            return BuildExpression(numer, null, cExpr.Exponent).AutoScale(cExpr.Scale, cExpr.Exponent);
+            return BuildExpression(numer, null, cExpr.Exponent).AutoScale(Math.Pow(cExpr.Scale, cExpr.Exponent));
         }
 
         public static Expression<T> Normal<T>(Expression<T> expression, bool expandPrefix = false)
             where T : IExpressible
         {
             var cExpr = expression.Convert(expandPrefix, true);
-            return BuildExpression(cExpr.Numerator, cExpr.Denominator, cExpr.Exponent).AutoScale(cExpr.Scale, cExpr.Exponent);
+            return BuildExpression(cExpr.Numerator, cExpr.Denominator, cExpr.Exponent).AutoScale(Math.Pow(cExpr.Scale, cExpr.Exponent));
         }
 
         private static Expression<T> BuildExpression<T>(List<Expression<T>> factors, double exponent)
@@ -61,18 +61,6 @@ namespace Engineering.Expressions.Fluent
             return new DivisionExpression<T>(num, den);
         }
 
-        private static Expression<T> AutoScale<T>(this Expression<T> expression, double scale, double exponent) where T : IExpressible
-            => Utility.Equals(scale, 1d)
-                ? expression
-                : new ScaleExpression<T>(Math.Pow(scale, exponent), expression);
-
-        private static Expression<T> AutoExponent<T>(this Expression<T> expression, double exponent) where T : IExpressible
-            => expression is EmptyExpression<T>
-                ? expression 
-                : Utility.Equals(exponent, 1d)
-                    ? expression
-                    : new ExponentExpression<T>(expression, exponent);
-        
         internal static ClassifiedExpression<T> Convert<T>(this Expression<T> expression, bool expandPrefix, bool recursive)
             where T : IExpressible
         {

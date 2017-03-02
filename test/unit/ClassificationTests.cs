@@ -38,7 +38,7 @@ namespace Engineering.Tests
         [MemberData("TestData", MemberType = typeof(ConstantExpressionDataSource))]
         public void IsModifiedConstantExpression(Expression<IQuantity> e, bool expectedResult)
         {
-            var result = e.IsModifiedConstantExpression();
+            var result = e.IsConstantOrUnaryExpression();
             Assert.Equal(expectedResult, result);
         }
 

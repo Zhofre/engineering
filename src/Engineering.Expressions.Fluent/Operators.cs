@@ -18,6 +18,22 @@ namespace Engineering.Expressions.Fluent
         public static ExponentExpression<T> RaiseTo<T>(this Expression<T> expression, double exponent) where T : IExpressible
             => new ExponentExpression<T>(expression, exponent);
 
+        public static ExponentExpression<T> Exponent<T>(this Expression<T> expression, double exponent) where T : IExpressible
+            => new ExponentExpression<T>(expression, exponent);
+
+
+        public static Expression<T> AutoScale<T>(this Expression<T> expression, double scale) where T : IExpressible
+            => Utility.Equals(scale, 1d)
+                ? expression
+                : new ScaleExpression<T>(scale, expression);
+
+        public static Expression<T> AutoExponent<T>(this Expression<T> expression, double exponent) where T : IExpressible
+            => expression is EmptyExpression<T>
+                ? expression 
+                : Utility.Equals(exponent, 1d)
+                    ? expression
+                    : new ExponentExpression<T>(expression, exponent);
+        
         public static InverseExpression<T> Invert<T>(this Expression<T> expression) where T : IExpressible
             => new InverseExpression<T>(expression);
 
@@ -32,6 +48,16 @@ namespace Engineering.Expressions.Fluent
 
         public static ScaleExpression<T> Scale<T>(this Expression<T> expression, double scale) where T : IExpressible
             => new ScaleExpression<T>(scale, expression);
+
+        public static Expression<T> ReplacePrefixes<T>(this Expression<T> expression, Prefix newPrefix) where T : IExpressible
+        {
+            var prExpr = expression as PrefixExpression<T>;
+            if (prExpr != null)
+                return prExpr.Content
+                    .Transform(x => x.ReplacePrefixes(newPrefix)) // take care of nested instances (although that's crazy)
+                    .Prefix(newPrefix).Scale(prExpr.Prefix.Value() / newPrefix.Value());
+            return expression.Transform(x => x.ReplacePrefixes(newPrefix));
+        }
 
         /// <summary>
         ///     Expands expression

@@ -15,14 +15,14 @@ namespace Engineering.Expressions.Fluent
             => expression is MultiplicationExpression<T>
             || expression is MultiplicationSequenceExpression<T>;
 
-        public static bool IsModifiedConstantExpression<T>(this Expression<T> expression) where T : IExpressible
+        public static bool IsConstantOrUnaryExpression<T>(this Expression<T> expression) where T : IExpressible
             => expression is ConstantExpression<T>
             || (expression is UnaryExpression<T>
-            ? IsModifiedConstantExpression((expression as UnaryExpression<T>).Content)
+            ? IsConstantOrUnaryExpression((expression as UnaryExpression<T>).Content)
             : false);
 
         public static ConstantExpression<T> ExtractConstantExpression<T>(this Expression<T> expression) where T : IExpressible
-            => (expression?.IsModifiedConstantExpression() ?? false)
+            => (expression?.IsConstantOrUnaryExpression() ?? false)
             ? (expression is ConstantExpression<T>
                 ? expression as ConstantExpression<T>
                 : (expression is UnaryExpression<T>
